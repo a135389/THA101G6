@@ -9,14 +9,18 @@ import courseCar.model.CourseCar;
 
 
 public interface CourseCarDao extends CoreDao{
-	void insert(CourseCar CourseCar);
+	CourseCarPK insert(CourseCar CourseCar);
 
-	int deleteByID(Integer userID,Integer courseID);
+	CourseCarPK deleteByID(CourseCarPK id);
+	
+	int deleteAllByUserID(Integer userID);
 
-	int updateByID(CourseCar CourseCar);
+	CourseCarPK updateByID(CourseCar CourseCar);
 
-	CourseCar selectByID(Integer userID,Integer courseID);
+	CourseCar selectByID(CourseCarPK id);
 
 	List<CourseCar> selectAll() throws ClassNotFoundException;
+	
+	List<CourseCar> selectAllByUserID(Integer userID) throws ClassNotFoundException;
 
 }

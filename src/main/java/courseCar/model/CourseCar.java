@@ -1,35 +1,26 @@
 package courseCar.model;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import courseCar.dao.CourseCarPK;
+
+
+
+
 
 @Entity
 public class CourseCar implements java.io.Serializable{
-	@Id
-	private Integer userID;
-	@Id
-	private Integer courseID;
+	@EmbeddedId
+	private CourseCarPK id;
+
+	
 	private Integer quantity;
-	public CourseCar() {};
-	public CourseCar(Integer userID, Integer courseID, Integer quantity) {
-		super();
-		this.userID = userID;
-		this.courseID = courseID;
-		this.quantity = quantity;
+	public CourseCarPK getId() {
+		return id;
 	}
-	public Integer getUserID() {
-		return userID;
-	}
-	public void setUserID(Integer userID) {
-		this.userID = userID;
-	}
-	public Integer getCourseID() {
-		return courseID;
-	}
-	public void setCourseID(Integer courseID) {
-		this.courseID = courseID;
+	public void setId(CourseCarPK id) {
+		this.id = id;
 	}
 	public Integer getQuantity() {
 		return quantity;
@@ -37,5 +28,14 @@ public class CourseCar implements java.io.Serializable{
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+	public CourseCar(CourseCarPK id, Integer quantity) {
+		super();
+		this.id = id;
+		this.quantity = quantity;
+	}
+	public CourseCar() {};
+
+
+
 	
 }

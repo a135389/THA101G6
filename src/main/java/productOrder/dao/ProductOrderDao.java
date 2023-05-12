@@ -2,11 +2,12 @@ package productOrder.dao;
 
 import java.util.List;
 
+import core.CoreDao;
 import productOrder.model.ProductOrder;
 
 
 
-public interface ProductOrderDao {
+public interface ProductOrderDao extends CoreDao{
 	int insert(ProductOrder ProductOrder);
 
 	int deleteByID(Integer productOrderID);

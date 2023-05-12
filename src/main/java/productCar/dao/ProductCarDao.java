@@ -2,18 +2,19 @@ package productCar.dao;
 
 import java.util.List;
 
+import core.CoreDao;
 import productCar.model.ProductCar;
 
 
 
-public interface ProductCarDao {
-	int insert(ProductCar ProductCar);
+public interface ProductCarDao extends CoreDao{
+	ProductCarPK insert(ProductCar ProductCar);
 
-	int deleteByID(Integer userID,Integer productID);
+	ProductCarPK deleteByID(ProductCarPK id);
 
-	int updateByID(ProductCar ProductCar);
+	ProductCarPK updateByID(ProductCar ProductCar);
 
-	ProductCar selectByID(Integer userID,Integer productID);
+	ProductCar selectByID(ProductCarPK id);
 
 	List<ProductCar> selectAll() throws ClassNotFoundException;
 }

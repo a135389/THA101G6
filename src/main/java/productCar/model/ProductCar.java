@@ -1,39 +1,39 @@
 package productCar.model;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import productCar.dao.ProductCarPK;
 @Entity
 public class ProductCar implements java.io.Serializable{
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userID;
-	private Integer productID;
+	@EmbeddedId
+	private ProductCarPK id;
+	
+	
 	private Integer quantity;
 	
-	public ProductCar(){};
-	public ProductCar(Integer userID, Integer productID, Integer quantity) {
-		this.userID = userID;
-		this.productID = productID;
-		this.quantity = quantity;
+	public ProductCarPK getId() {
+		return id;
 	}
-	public Integer getUserID() {
-		return userID;
+
+	public void setId(ProductCarPK id) {
+		this.id = id;
 	}
-	public void setUserID(Integer userID) {
-		this.userID = userID;
-	}
-	public Integer getProductID() {
-		return productID;
-	}
-	public void setProductID(Integer productID) {
-		this.productID = productID;
-	}
+
 	public Integer getQuantity() {
 		return quantity;
 	}
+
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
+
+	public ProductCar(ProductCarPK id, Integer quantity) {
+		super();
+		this.id = id;
+		this.quantity = quantity;
+	}
+
+	public ProductCar(){};
+
 }

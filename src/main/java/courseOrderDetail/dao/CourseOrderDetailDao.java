@@ -2,12 +2,13 @@ package courseOrderDetail.dao;
 
 import java.util.List;
 
+import core.CoreDao;
 import courseOrderDetail.model.CourseOrderDetail;
 
 
 
 
-public interface CourseOrderDetailDao {
+public interface CourseOrderDetailDao extends CoreDao{
 	int insert(CourseOrderDetail CourseOrderDetail);
 
 	int deleteByID(Integer CourseOrderDetailID);

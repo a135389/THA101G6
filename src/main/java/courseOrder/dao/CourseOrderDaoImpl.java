@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Session;
+
 import courseOrder.model.CourseOrder;
 
 
@@ -31,32 +33,15 @@ public class CourseOrderDaoImpl implements CourseOrderDao{
 	}
 	@Override
 	public int insert(CourseOrder CourseOrder) {
-		String sql = "insert into CourseOrder values(?,?,?,?)";
-		try (Connection conn = DriverManager.getConnection(url, user, passwd);
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1, CourseOrder.getCourseOrderID());
-			pstmt.setInt(2, CourseOrder.getUserID());
-			pstmt.setInt(3, CourseOrder.getTotalPrice());
-			pstmt.setTimestamp(4, CourseOrder.getBuyDateTime());
-
-			return pstmt.executeUpdate(); // 回傳0到N
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+		getSession().persist(CourseOrder);
+		return CourseOrder.getCourseOrderID();
 	}
 	@Override
 	public int deleteByID(Integer CourseOrderID) {
-		String sql = "delete from CourseOrder where courseOrderID = ? ";
-		try (Connection conn = DriverManager.getConnection(url, user, passwd);
-				PreparedStatement pstmt = conn.prepareStatement(sql);) {
-			pstmt.setInt(1,CourseOrderID);
-			
-			return pstmt.executeUpdate(); // 回傳0到N
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+		Session session=getSession();
+		CourseOrder courseOrder=session.get(CourseOrder.class, CourseOrderID);
+		session.remove(courseOrder);
+		return CourseOrderID;
 	}
 	@Override
 	public int updateByID(CourseOrder CourseOrder) {
