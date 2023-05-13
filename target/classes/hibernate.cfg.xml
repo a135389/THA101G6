@@ -18,12 +18,14 @@
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 
-		<mapping class="courseCar.model.CourseCar" />
-		<mapping class="courseOrder.model.CourseOrder" />
-		<mapping class="courseOrderDetail.model.CourseOrderDetail" />
-		<mapping class="productCar.model.ProductCar" />
-		<mapping class="productOrder.model.ProductOrder" />
-		<mapping class="productOrderDetail.model.ProductOrderDetail" />
+		<mapping class="order.courseCar.model.CourseCar" />
+		<mapping class="order.courseOrder.model.CourseOrder" />
+		<mapping class="order.courseOrderDetail.model.CourseOrderDetail" />
+		<mapping class="order.productCar.model.ProductCar" />
+		<mapping class="order.productOrder.model.ProductOrder" />
+		<mapping class="order.productOrderDetail.model.ProductOrderDetail" />
+		<mapping class="product.model.Product" />
+		<mapping class="course.model.Course" />
 
 	</session-factory>
 
