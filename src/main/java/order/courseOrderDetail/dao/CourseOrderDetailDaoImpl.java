@@ -10,21 +10,9 @@ import order.courseOrderDetail.model.CourseOrderDetail;
 
 
 public class CourseOrderDetailDaoImpl implements CourseOrderDetailDao{
-	String driver = "com.mysql.cj.jdbc.Driver";
-	String url = "jdbc:mysql://localhost:3306/PKtest?serverTimezone=Asia/Taipei";
-	String user = "root";
-	String passwd = "a1b2c3";
-	public static void main(String[] args) throws ClassNotFoundException {
-		CourseOrderDetail a=new CourseOrderDetail(1,2,3,400,5,"上架中");
-		CourseOrderDetailDaoImpl b=new CourseOrderDetailDaoImpl();
-		CourseOrderDetail c=new CourseOrderDetail(1,2,3,500,6,"下架中");
-//		b.insert(a);
-//		b.deleteByID(1);
-//		b.updateByID(c);
-//		System.out.println(b.selectByID(1).getCourseOrderDetailStatus());
-//		System.out.println(b.selectAll().get(0).getCourseOrderDetailStatus());
 
-	}
+
+	
 
 	@Override
 	public int insert(CourseOrderDetail CourseOrderDetail) {

@@ -26,6 +26,7 @@
 		<mapping class="order.productOrderDetail.model.ProductOrderDetail" />
 		<mapping class="product.model.Product" />
 		<mapping class="course.model.Course" />
+		<mapping class="mem.model.Member" />
 
 	</session-factory>
 

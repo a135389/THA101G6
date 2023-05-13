@@ -1,31 +1,36 @@
 package order.courseCar.service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import core.util.HibernateUtil;
-import order.courseCar.dao.CourseCarDaoImpl;
-import order.courseCar.dao.CourseCarPK;
-import order.courseCar.model.CourseCar;
-import order.productCar.dao.ProductCarDaoImpl;
-import order.productCar.dao.ProductCarPK;
-import order.productCar.model.ProductCar;
-import order.productCar.service.ProductCarService;
-import order.productCar.service.ProductCarServiceImpl;
+import order.courseOrder.dao.CourseOrderDaoImpl;
+import order.courseOrder.model.CourseOrder;
+import order.productOrder.service.ProductOrderService;
+import order.productOrder.service.ProductOrderServiceImpl;
 
 
 public class test {
 //	private static CourseCarService ccs=new CourseCarServiceImpl();
-	private static ProductCarService pcs=new ProductCarServiceImpl();
+//	private static ProductCarService pcs=new ProductCarServiceImpl();
+//	private static CourseOrderService cos=new CourseOrderServiceImpl();
+	private static ProductOrderService pos=new ProductOrderServiceImpl();
+	
 
 	public static void main(String[] args) {
-		CourseCarDaoImpl a =new CourseCarDaoImpl();
-		CourseCarPK b=new CourseCarPK(2,2);
-		CourseCar c=new CourseCar(b,5);
-		ProductCarDaoImpl a1=new ProductCarDaoImpl();
-		ProductCarPK b1=new ProductCarPK(2,3);
-		ProductCar c1=new ProductCar(b1,5);
+//		CourseCarDaoImpl a =new CourseCarDaoImpl();
+//		CourseCarPK b=new CourseCarPK(2,2);
+//		CourseCar c=new CourseCar(b,5);
+//		ProductCarDaoImpl a1=new ProductCarDaoImpl();
+//		ProductCarPK b1=new ProductCarPK(2,3);
+//		ProductCar c1=new ProductCar(b1,5);
+//		CourseOrderDaoImpl a2=new CourseOrderDaoImpl();
+//		CourseOrder b2=new CourseOrder(null,1,500,Timestamp.from(Instant.now()));
+		
 		
 		
 		SessionFactory sessionFactory=HibernateUtil.getSessionFactory();
@@ -53,7 +58,13 @@ public class test {
 //			System.out.println(pcs.ListCar(1).get(0).getQuantity());
 //			pcs.addCar(c1);
 //			pcs.removeCar(b1);
-			pcs.sendAply(2,"台北市");
+//			pcs.sendAply(2,"台北市");
+//			System.out.println(cos.listOrderByID(2).get(1).getTotalPrice());
+//			System.out.println(cos.getIdByUserName("Tony").get(0));
+//			System.out.println(cos.listOrderDetail(5).get(0).getCourseOrderDetailStatus());
+			System.out.println(pos.listOrderByID(2).get(1).getTotalPrice());
+			System.out.println(pos.getIdByUserName("Tony").get(0));
+			System.out.println(pos.listOrderDetail(2).get(0).getQuantity());
 			
 			tr.commit();
 		} catch (Exception e) {

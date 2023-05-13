@@ -29,6 +29,7 @@ public class CourseCarServiceImpl implements CourseCarService{
 			return dao.selectAllByUserID(userID);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			System.out.println("取得購物車失敗");
 			return null;
 		}
 	}
