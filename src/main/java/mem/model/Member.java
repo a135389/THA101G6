@@ -20,14 +20,14 @@ public class Member implements java.io.Serializable{
 	private Date birthDate;
 	private String personID;
 	private String phone;
-	private String addres;
+	private String address;
 	private String level;
 	private byte[] photo;
 	private String role;
 	private String userStatus;
 	public Member() {}
 	public Member(Integer userID, String email, String password, String userName, String nickName, String gender,
-			Date birthDate, String personID, String phone, String addres, String level, byte[] photo, String role,
+			Date birthDate, String personID, String phone, String address, String level, byte[] photo, String role,
 			String userStatus) {
 		super();
 		this.userID = userID;
@@ -39,7 +39,7 @@ public class Member implements java.io.Serializable{
 		this.birthDate = birthDate;
 		this.personID = personID;
 		this.phone = phone;
-		this.addres = addres;
+		this.address = address;
 		this.level = level;
 		this.photo = photo;
 		this.role = role;
@@ -99,11 +99,11 @@ public class Member implements java.io.Serializable{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddres() {
-		return addres;
+	public String getAddress() {
+		return address;
 	}
-	public void setAddres(String addres) {
-		this.addres = addres;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getLevel() {
 		return level;

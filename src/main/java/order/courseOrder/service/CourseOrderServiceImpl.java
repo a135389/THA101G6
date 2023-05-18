@@ -34,11 +34,19 @@ public class CourseOrderServiceImpl implements CourseOrderService{
 		return dao.getIdByUserName(userName);
 		//可能查到同名的會員或無資料,需要送到controller做處理
 	}
+	@Override
+	public List<CourseOrder> listOrderByUserName(String userName,Integer index) {
+		List<Integer>list=getIdByUserName(userName);
+		Integer userID=list.get(index);	
+		return listOrderByID(userID);
+	}
 
 	@Override
 	public List<CourseOrderDetail> listOrderDetail(Integer courseOrderID) {
 		
 		return dao.selectDetailByOrderID(courseOrderID);
 	}
+
+
 
 }

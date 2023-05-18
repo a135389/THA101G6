@@ -1,0 +1,11 @@
+.container-form {
+  width: 500px; /* 調整container的寬度 */
+  height: 300px; /* 調整container的高度 */
+  overflow: auto;
+}
+.form-container {
+  width: 300px; /* 設置寬度 */
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 調整陰影效果的數值根據需求進行調整 */
+  padding: 20px;
+}

@@ -1,15 +1,10 @@
 package order.courseCar.service;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import core.util.HibernateUtil;
-import order.courseOrder.dao.CourseOrderDaoImpl;
-import order.courseOrder.model.CourseOrder;
 import order.productOrder.service.ProductOrderService;
 import order.productOrder.service.ProductOrderServiceImpl;
 
@@ -58,13 +53,15 @@ public class test {
 //			System.out.println(pcs.ListCar(1).get(0).getQuantity());
 //			pcs.addCar(c1);
 //			pcs.removeCar(b1);
-//			pcs.sendAply(2,"台北市");
+//			pcs.sendAply(3,"桃園市");
 //			System.out.println(cos.listOrderByID(2).get(1).getTotalPrice());
 //			System.out.println(cos.getIdByUserName("Tony").get(0));
 //			System.out.println(cos.listOrderDetail(5).get(0).getCourseOrderDetailStatus());
-			System.out.println(pos.listOrderByID(2).get(1).getTotalPrice());
-			System.out.println(pos.getIdByUserName("Tony").get(0));
-			System.out.println(pos.listOrderDetail(2).get(0).getQuantity());
+//			System.out.println(cos.listOrderByUserName("tony", 0).get(0).getTotalPrice());
+//			System.out.println(pos.listOrderByID(2).get(1).getTotalPrice());
+//			System.out.println(pos.getIdByUserName("Tony").get(0));
+//			System.out.println(pos.listOrderDetail(2).get(0).getQuantity());
+			System.out.println(pos.listOrderByUserName("tony", 0).get(0).getDeliveryAddr());
 			
 			tr.commit();
 		} catch (Exception e) {

@@ -10,6 +10,8 @@ public interface ProductOrderService {
 	List<ProductOrder> listOrderByID(Integer userID);
 	//以姓名查詢該使用者id,考慮到同名狀況,size()>1時需要再從前端選擇會員,並送出一個ID來查詢
 	List<Integer> getIdByUserName(String userName);
+	//上面情況經前端選擇後再用id取得訂單
+	List<ProductOrder> listOrderByUserName(String userName,Integer index);
 	//取得該訂單主檔所有明細
 	List<ProductOrderDetail>listOrderDetail(Integer productOrderID);
 
