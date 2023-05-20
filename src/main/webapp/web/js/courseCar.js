@@ -16,12 +16,11 @@ $(document).ready(function init(){
                 let coursePhoto=data[i].coursePhoto;
                 let courseName=data[i].courseName;
                 let coursePrice=data[i].coursePrice;
-                console.log(data[i]);
                 list_html +="<tr listID="+courseID+">";
                 list_html +=    "<td>"+coursePhoto+"</td>"
                 list_html +=    "<td>"+courseName+"</td>"
                 list_html +=    "<td>"+coursePrice+"</td>"
-                list_html +=    "<td><div class='delMark' id='delMark'>X</div></td>"
+                list_html +=    "<td><div class='delMark'>X</div></td>"
                 list_html +="</tr>"
 
                 $("#courseCarList > table > tbody").prepend(list_html);

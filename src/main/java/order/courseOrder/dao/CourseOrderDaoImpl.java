@@ -1,15 +1,10 @@
 package order.courseOrder.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import order.courseOrder.model.CourseOrder;
 import order.courseOrderDetail.model.CourseOrderDetail;
@@ -64,5 +59,71 @@ public class CourseOrderDaoImpl implements CourseOrderDao{
 		
 		return getSession().createQuery("FROM CourseOrderDetail WHERE courseOrderID = "+courseOrderID,CourseOrderDetail.class).list();
 	}
+	@Override
+	public int getTotalPriceByID(Integer courseOrderID) {
+		return getSession().get(CourseOrder.class, courseOrderID).getTotalPrice();
+	}
+	@Override
+	public byte[] getCoursePhoto(Integer courseID) {
+		return getSession().createQuery("SELECT coursePhoto FROM Course WHERE courseID = "+courseID,byte[].class).list().get(0);
+	}
+	@Override
+	public String getCourseName(Integer courseID) {
+		return getSession().createQuery("SELECT courseName FROM Course WHERE courseID = "+courseID,String.class).list().get(0);
+	}
+	@Override
+	public List<Integer> getAllOrderIdByUser(Integer userID) {
+		return getSession().createQuery("SELECT courseOrderID FROM CourseOrder WHERE userID = "+userID,Integer.class).list();
+	}
+	@Override
+	public Timestamp getOrderBuyDate(Integer courseOrderID) {
+		Date date=getSession().createQuery("SELECT buyDateTime FROM CourseOrder WHERE courseOrderID = "+courseOrderID,Date.class).list().get(0);
+		Timestamp ts=new Timestamp(date.getTime());
+		return ts;
+	}
+	@Override
+	public int deleteDetailByID(Integer CourseOrderDetailID) {
+		CourseOrderDetail courseOrderDetail=getSession().get(CourseOrderDetail.class, CourseOrderDetailID);
+		getSession().remove(courseOrderDetail);
+		return CourseOrderDetailID;
+	}
+	@Override
+	public int getOrderIdByDetail(Integer courseOrderDetailID) {
+		System.out.println(courseOrderDetailID);
+//		return getSession().createQuery("SELECT courseOrderID FROM CourseOrderDetail WHERE courseOrderDetailID = "+courseOrderDetailID,Integer.class).list().get(0);
+		return getSession().get(CourseOrderDetail.class, courseOrderDetailID).getCourseOrderID();
+		
+	}
+	@Override
+	public List<Integer> getOrderAllDetailPrice(Integer courseOrderID) {
+		return getSession().createQuery("SELECT coursePrice FROM CourseOrderDetail WHERE courseOrderID = "+courseOrderID,Integer.class).list();
+	}
+	@Override
+	public void updateOrderPrice(Integer courseOrderID, Integer price) {
+		getSession().createQuery("UPDATE CourseOrder "
+									+"SET totalPrice = :totalPrice "
+									+"WHERE courseOrderID = :courseOrderID")
+									.setParameter("totalPrice", price)
+									.setParameter("courseOrderID",courseOrderID).executeUpdate();
+		
+	}
+	@Override
+	public List<String> getOrderDetailStatus(Integer courseOrderID) {
+
+		List<String> list=getSession().createQuery("SELECT courseOrderDetailStatus FROM CourseOrderDetail WHERE courseOrderID = "+courseOrderID,String.class).list();
+		return list;
+	}
+	@Override
+	public void updateDetailStatus(Integer courseOrderDetailID) {
+		getSession().createQuery("UPDATE CourseOrderDetail "
+									+"SET courseOrderDetailStatus = :courseOrderDetailStatus "
+									+"WHERE courseOrderDetailID = :courseOrderDetailID")
+									.setParameter("courseOrderDetailStatus","已結帳")
+									.setParameter("courseOrderDetailID", courseOrderDetailID).executeUpdate();
+				
+		
+	}
+
+	
 
 }

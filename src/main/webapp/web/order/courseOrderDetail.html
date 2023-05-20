@@ -102,13 +102,14 @@
           <div
             class="col-6"
             style="border: 2px solid blue; width: 70%; float: left"
-            id="courseCarList"
+            id="courseOrderDetailList"
           >
             <table>
               <thead>
                 <th>課程</th>
                 <th>名稱</th>
                 <th>單價</th>
+                <th>審核狀態</th>
                 <th></th>
               </thead>
               <tbody></tbody>
@@ -125,12 +126,18 @@
             </table>
             <div id="totalPrice"></div>
           </div>
-          <div class="col-6" style="border: 2px solid blue; text-align: center">
-            <p>連絡電話:</p>
-            <input type="text" id="phoneNumber" />
-            <p>身分證字號:</p>
-            <input type="text" id="idNumber" /><br />
-            <label><input type="radio" id="getMemberINFO" />同會員資料</label>
+          <div
+            class="col-6"
+            id="inputDiv"
+            style="border: 2px solid blue; text-align: center"
+          >
+            <p>卡號:</p>
+            <input type="text" id="cardNumber" />
+            <p>有效期:</p>
+            <input type="text" id="cardExpiryDate" />
+            <p>安全碼:</p>
+            <input type="text" id="CSC" />
+            <br />
             <div id="alert" style="color: red; font-size: 5px"></div>
           </div>
           <div
@@ -146,10 +153,8 @@
               margin-left: 100px;
               cursor: pointer;
             "
-            id="sendApply"
-          >
-            送出申請
-          </div>
+            id="checkBtn"
+          ></div>
         </div>
 
         <!-- 側邊工具列 -->
@@ -218,6 +223,6 @@
   <script src="../js/bootstrap.bundle.js"></script>
   <script src="../js/frontend_public.js"></script>
   <script src="../js/jQuery v3.7.0.js"></script>
-  <script src="../js/courseCar.js"></script>
+  <script src="../js/courseOrderDetail.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </html>

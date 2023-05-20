@@ -98,58 +98,12 @@
       <!-- 頁面內容置於此 -->
       <div class="container h-100">
         <br />
-        <div class="row">
+        <div class="row" style="justify-content: center">
           <div
             class="col-6"
-            style="border: 2px solid blue; width: 70%; float: left"
-            id="courseCarList"
-          >
-            <table>
-              <thead>
-                <th>課程</th>
-                <th>名稱</th>
-                <th>單價</th>
-                <th>移除</th>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-          <div
-            class="col-6"
-            style="border: 2px solid blue; width: 20%; text-align: center"
-          >
-            <table>
-              <thead>
-                <th>總價</th>
-              </thead>
-            </table>
-            <div id="totalPrice"></div>
-          </div>
-          <div class="col-6" style="border: 2px solid blue; text-align: center">
-            <p>連絡電話:</p>
-            <input type="text" id="phoneNumber" />
-            <p>身分證字號:</p>
-            <input type="text" id="idNumber" /><br />
-            <label><input type="radio" id="getMemberINFO" />同會員資料</label>
-            <div id="alert" style="color: red; font-size: 5px"></div>
-          </div>
-          <div
-            class="col-6"
-            style="
-              border: 2px solid blue;
-              text-align: center;
-              padding: 15px 0;
-              background-color: aquamarine;
-              width: 400px;
-              height: 60px;
-              font-size: large;
-              margin-left: 100px;
-              cursor: pointer;
-            "
-            id="sendApply"
-          >
-            結帳
-          </div>
+            style="border: 2px solid blue; width: 70%"
+            id="courseOrderList"
+          ></div>
         </div>
 
         <!-- 側邊工具列 -->
@@ -218,6 +172,6 @@
   <script src="../js/bootstrap.bundle.js"></script>
   <script src="../js/frontend_public.js"></script>
   <script src="../js/jQuery v3.7.0.js"></script>
-  <script src="../js//courseOrder.js"></script>
+  <script src="../js/courseOrder.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </html>
