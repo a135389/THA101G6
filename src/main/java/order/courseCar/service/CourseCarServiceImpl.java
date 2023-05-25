@@ -27,7 +27,9 @@ public class CourseCarServiceImpl implements CourseCarService{
 	@Override
 	public List<CourseCar> ListAll(Integer userID) {		
 		try {
+			System.out.println("取得購物車成功");
 			return dao.selectAllByUserID(userID);
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			System.out.println("取得購物車失敗");
@@ -160,8 +162,25 @@ public class CourseCarServiceImpl implements CourseCarService{
 		}
 		
 	}
+	@Override
+	public byte[] courseImg(Integer courseID) {
+		return dao.getCourseByID(courseID).getCoursePhoto();
+	}
 
 
+//	public void insertImg(String base64) {
+//		Course course = new Course();
+//		// 把base64轉byte陣列
+//		byte[] bytes = base64.getBytes();
+//		course.setCoursePhoto(bytes);
+//		dao.insertCourse(course);
+//	}
+//	
+//	public String selectCourseImg(Integer courseID) {
+//		byte[] coursePhoto = dao.getCourseByID(courseID).getCoursePhoto();
+//		// 把byte陣列轉回base64字串
+//		return new String(coursePhoto);
+//	}
 
 
 

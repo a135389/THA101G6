@@ -35,24 +35,24 @@ public class CourseOrderServlet extends HttpServlet{
 		System.out.println(action);
 		String fowardPath="";
 		switch(action) {
-		case "setOrderHeader":
-			fowardPath=setOrderHeader(req,res);
-			break;
-		case "listOrder":
-			fowardPath=listOrder(req,res);
-			break;
-		case "removeOrderDetail":
-			fowardPath=removeOrderDetail(req,res);
-			break;
-		case "getTotal":
-			fowardPath=getTotal(req,res);
-			break;
-		case "orderStatus":
-			fowardPath=orderStatus(req,res);
-			break;
-		case "checkout":
-			fowardPath=checkout(req,res);
-			break;
+			case "setOrderHeader":
+				fowardPath=setOrderHeader(req,res);
+				break;
+			case "listOrder":
+				fowardPath=listOrder(req,res);
+				break;
+			case "removeOrderDetail":
+				fowardPath=removeOrderDetail(req,res);
+				break;
+			case "getTotal":
+				fowardPath=getTotal(req,res);
+				break;
+			case "orderStatus":
+				fowardPath=orderStatus(req,res);
+				break;
+			case "checkout":
+				fowardPath=checkout(req,res);
+				break;
 
 			
 		}

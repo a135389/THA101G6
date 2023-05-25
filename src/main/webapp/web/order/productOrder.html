@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- 引入bootstrap套件CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.css" />
-    <link rel="stylesheet" href="/css/root.css" />
-    <link rel="stylesheet" href="/css/frontend_public.css" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/frontend_public.css" />
+    <link rel="stylesheet" href="../css/courseCar.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
     <title>前臺公版</title>
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark border border-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img src="./img/logo.png" alt="UI Kit" style="width: 50px" />
+        <a class="navbar-brand" href="../index.html">
+          <img src="../img/logo.png" alt="UI Kit" style="width: 50px" />
         </a>
         <button
           class="navbar-toggler"
@@ -93,10 +98,12 @@
       <!-- 頁面內容置於此 -->
       <div class="container h-100">
         <br />
-        <h1>內容內容</h1>
-        <div class="row">
-          <div class="col-6" style="border: 2px solid blue">文字</div>
-          <div class="col-6" style="border: 2px solid blue">文字</div>
+        <div class="row" style="justify-content: center">
+          <div
+            class="col-6"
+            style="border: 2px solid blue; width: 70%"
+            id="productOrderList"
+          ></div>
         </div>
 
         <!-- 側邊工具列 -->
@@ -110,14 +117,14 @@
             type="button"
             class="sidetool_button btn btn-outline-black mb-1"
           >
-            <img class="sidetool_icon" src="./img/chat.png" alt="#" />
+            <img class="sidetool_icon" src="../img/chat.png" alt="#" />
           </button>
           <!-- 客服 -->
           <button
             type="button"
             class="sidetool_button btn btn-outline-black mb-1"
           >
-            <img class="sidetool_icon" src="./img/service.png" alt="#" />
+            <img class="sidetool_icon" src="../img/service.png" alt="#" />
           </button>
           <!-- 返回頂端 -->
           <button
@@ -125,7 +132,7 @@
             id="return_top_button"
             class="sidetool_button btn btn-outline-black mb-1"
           >
-            <img class="sidetool_icon" src="./img/up_arrow.png" alt="#" />
+            <img class="sidetool_icon" src="../img/up_arrow.png" alt="#" />
           </button>
         </div>
       </div>
@@ -135,8 +142,8 @@
       <div class="container">
         <div class="row">
           <div class="col-1 d-flex align-items-center">
-            <a class="navbar-brand" href="index.html">
-              <img src="./img/logo.png" style="width: 50px" />
+            <a class="navbar-brand" href="../index.html">
+              <img src="../img/logo.png" style="width: 50px" />
             </a>
           </div>
           <div class="col-7 d-flex align-items-center">
@@ -162,6 +169,9 @@
     </footer>
   </body>
   <!-- 引入bootstrap套件JS -->
-  <script src="/js/bootstrap.bundle.js"></script>
-  <script src="/js/frontend_public.js"></script>
+  <script src="../js/bootstrap.bundle.js"></script>
+  <script src="../js/frontend_public.js"></script>
+  <script src="../js/jQuery v3.7.0.js"></script>
+  <script src="../js/productOrder.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 </html>

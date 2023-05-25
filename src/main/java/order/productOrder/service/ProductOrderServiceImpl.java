@@ -3,8 +3,11 @@ package order.productOrder.service;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import core.util.HibernateUtil;
+import order.courseOrderDetail.model.CourseOrderDetail;
 import order.productOrder.dao.ProductOrderDao;
 import order.productOrder.dao.ProductOrderDaoImpl;
 import order.productOrder.model.ProductOrder;
@@ -42,6 +45,41 @@ public class ProductOrderServiceImpl implements ProductOrderService{
 	@Override
 	public List<ProductOrderDetail> listOrderDetail(Integer productOrderID) {
 		return dao.selectDetailByOrderID(productOrderID);
+	}
+	@Override
+	public JSONArray getOrderListHeader(Integer userID) {
+		JSONArray jsonArray=new JSONArray();
+		List<Integer>productOrderIdList=dao.getAllOrderIdByUser(userID);
+		for(Integer productOrderID:productOrderIdList) {
+			JSONObject jsonObject=new JSONObject();
+			jsonObject.put("productOrderID",productOrderID);
+			jsonObject.put("buyDateTime",dao.getOrderBuyDate(productOrderID));
+			jsonObject.put("deliveryAddr", dao.getAddr(productOrderID));
+			jsonObject.put("totalPrice", dao.getTotalPrice(productOrderID));
+			jsonObject.put("productOrderStatus",dao.getOrderStatus(productOrderID));
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray;
+	}
+	@Override
+	public JSONArray getProductINFO(Integer productOrderID) {
+		JSONArray jsonArray=new JSONArray();
+		List<ProductOrderDetail>list=dao.selectDetailByOrderID(productOrderID);
+
+		for(ProductOrderDetail productOrderDetail:list) {
+			JSONObject jsonObject=new JSONObject();
+			int productID=productOrderDetail.getProductID();
+
+			jsonObject.put("productOrderDetailID",productOrderDetail.getProductOrderDetailID());
+			jsonObject.put("productID",productID);
+			jsonObject.put("productPrice",productOrderDetail.getProductPrice());
+			jsonObject.put("quantity",productOrderDetail.getQuantity());
+			jsonObject.put("productImage",dao.getProductImage(productID));
+			jsonObject.put("productName",dao.getProductName(productID));
+			jsonArray.put(jsonObject);				
+	}
+	return jsonArray;
 	}
 
 

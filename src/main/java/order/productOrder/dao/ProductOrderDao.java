@@ -1,10 +1,12 @@
 package order.productOrder.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import core.CoreDao;
 import order.productOrder.model.ProductOrder;
 import order.productOrderDetail.model.ProductOrderDetail;
+import product.model.Product;
 
 
 
@@ -25,4 +27,22 @@ public interface ProductOrderDao extends CoreDao{
 	List<ProductOrder> selectAllByUserID(Integer userID) throws ClassNotFoundException;
 	
 	List<ProductOrderDetail> selectDetailByOrderID(Integer productOrderID);
+	
+	Product getProductByID(Integer productID);
+	
+	List<Integer> getAllOrderIdByUser(Integer userID);
+
+	Timestamp getOrderBuyDate(Integer productOrderID);
+	
+	String getAddr(Integer productOrderID);
+	
+	Integer getTotalPrice(Integer productOrderID);
+	
+	String getOrderStatus(Integer productOrderID);
+	
+	byte[]getProductImage(Integer productID);
+	
+	String getProductName(Integer productID);
+	
+	
 }

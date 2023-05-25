@@ -1,7 +1,8 @@
 var MemberID=3;
+var productCar;
 $(document).ready(function init(){
      $.ajax({
-         url:"CourseCarServlet",
+         url:"ProductCarServlet",
          type:"POST",
          data:{"userID":MemberID,
                 "action":"listUserCar"
@@ -10,23 +11,28 @@ $(document).ready(function init(){
          success:function(data){
          
              console.log("購物車載入成功");
+             console.log(data);
+             productCar=data;
+             console.log(productCar);
              for(let i=0;i<data.length;i++){
                 let list_html = "";
-                let courseID=data[i].courseID;
-                let coursePhoto=data[i].coursePhoto;
-                let courseName=data[i].courseName;
-                let coursePrice=data[i].coursePrice;
-
-                
-                list_html +="<tr listID="+courseID+">";
-                list_html +=    '<td><img alt="" src="/THA101G6/courseImgServlet?courseID='+courseID+'" /></td>'
-                list_html +=    "<td>"+courseName+"</td>"
-                list_html +=    "<td>"+coursePrice+"</td>"
+                let productID=data[i].productID;
+                let productImage=data[i].productImage;
+                let productName=data[i].productName;
+                let productPrice=data[i].productPrice;
+                let quantity=data[i].quantity;
+                let subTotal=data[i].subTotal;
+                list_html +="<tr listID="+productID+">";
+                list_html +=    '<td><img alt="" src="/THA101G6/productImgServlet?productID='+productID+'" /></td>'
+                list_html +=    "<td>"+productName+"</td>"
+                list_html +=    "<td>"+productPrice+"</td>"
+                list_html +=    "<td>"+quantity+"</td>"
+                list_html +=    "<td>"+subTotal+"</td>"
                 list_html +=    "<td><div class='delMark'>X</div></td>"
                 list_html +="</tr>"
 
-                $("#courseCarList > table > tbody").prepend(list_html);
-                
+                $("#productCarList > table > tbody").prepend(list_html);
+                stockCheck(productID,productName);
              }
              
 
@@ -43,23 +49,23 @@ $(".row").on("click",".delMark",function(){
     let listID=$(this).closest("tr").attr("listID");
     console.log("觸發"+listID);
     $.confirm({
-        title:"移除課程?",
-        content:"確定要從購物車移除課程嗎?",
+        title:"移除商品?",
+        content:"確定要從購物車移除商品嗎?",
         buttons:{
             確定:function(){
                 $.ajax({
-                    url:"CourseCarServlet",
+                    url:"ProductCarServlet",
                     type:"POST",
                     data:{
                         "action":"removeCar",
                         "userID":MemberID,
-                        "courseID":listID               
+                        "productID":listID               
                 },
                     dataType:"json",
                     success:function(data){
                         console.log("購物車成功刪除");
-                        let courseID=data.courseID;
-                        $("tr[listID="+courseID+"]").remove();
+                        let productID=data.productID;
+                        $("tr[listID="+productID+"]").remove();
                         total();
                     },
                     error:function(err){
@@ -76,46 +82,42 @@ $(".row").on("click",".delMark",function(){
     })
     
 })
-$("#sendApply").click(function(){
+$("#checkout").click(function(){
     $("#alert").html("");
-    let phoneNumber=$("#phoneNumber").val();
-    let idNumber=$("#idNumber").val();
-    let regexPhone=new RegExp("^09[0-9]{8}$");
-    let regexId=new RegExp("^[a-zA-Z][0-9]{9}$");
+    let address=$("#address").val();
+    let cardNumber=$("#cardNumber").val();
+    let expiryDate=$("#expiryDate").val();
+    let CSC=$("#CSC").val();
     let alert="";
-    if(phoneNumber.length==0){
-        alert+="<p>請輸入電話號碼</p>";
+    if(address.length==0){
+        alert+="<p>請輸入寄送地址</p>";
     }
-    if(!regexPhone.test(phoneNumber)){
-        alert+="<p>請輸入正確的電話號碼格式</p>"
-    }
-    if(idNumber.length==0){
-        alert+="<p>請輸入身分證字號</p>"
-    }
-    if(!regexId.test(idNumber)){
-        alert+="<p>請輸入正確的身分證字號格式</p>"
-    }
+
     $("#alert").html(alert);
     $("#phoneNumber").val("");
     $("#idNumber").val("");
     if(alert.length==0){
         console.log("資料輸入成功")
+        for(let i=0;i<productCar.length;i++){
+            stockCheck(productCar[i].productID,productCar[i].productName);
+        }
         $.confirm({
             title:"申請確認",
-            content:"確定送出以上課程申請嗎?",
+            content:"確定結帳以上商品嗎?",
             buttons:{
                 確定:function(){
                     $.ajax({
-                        url:"CourseCarServlet",
+                        url:"ProductCarServlet",
                         type:"POST",
                         data:{"userID":MemberID,
-                               "action":"sendApply"
+                                "address":address,
+                               "action":"checkout"
                        },
                         dataType:"json",
                         success:function(data){
                             if(data.sendApply){
                                 console.log("送出申請成功")
-                                $("#courseCarList>table>tbody").html("");
+                                $("#productCarList>table>tbody").html("");
                                 total();
                             }
                             else{
@@ -167,7 +169,7 @@ $("#getMemberINFO").click(function(){
 })
 function total(){
     $.ajax({
-       url:"CourseCarServlet",
+       url:"ProductCarServlet",
        type:"POST",
        data:{"userID":MemberID,
               "action":"getTotal"
@@ -183,3 +185,35 @@ function total(){
        }
     })
    }
+function stockCheck(productID,productName){
+    $.ajax({
+        url:"ProductCarServlet",
+        type:"POST",
+        data:{"userID":MemberID,
+                "productID":productID,
+               "action":"stockCheck"
+       },
+        dataType:"json",
+        success:function(data){
+            console.log("存貨檢查成功")
+            if(data.stockCheck){
+                console.log("尚有存貨")
+                
+            }else{
+                $.alert({
+                    title:"警告",
+                    content:productName+"存貨不足,請至商品頁面重新選擇數量加入購物車",
+                    "知道了":function(){
+                    }
+                })
+                $("tr[listID="+productID+"]").remove();
+                total();
+     
+            }
+
+        },
+        error:function(){
+            console.log("存貨檢查失敗")
+        }
+     })
+}

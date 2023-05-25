@@ -2,6 +2,8 @@ package order.productOrder.service;
 
 import java.util.List;
 
+import org.json.JSONArray;
+
 import order.productOrder.model.ProductOrder;
 import order.productOrderDetail.model.ProductOrderDetail;
 
@@ -14,5 +16,9 @@ public interface ProductOrderService {
 	List<ProductOrder> listOrderByUserName(String userName,Integer index);
 	//取得該訂單主檔所有明細
 	List<ProductOrderDetail>listOrderDetail(Integer productOrderID);
+	//回傳訂單的ID與時間作為訂單列表的表頭
+	JSONArray getOrderListHeader(Integer userID);
+	//回傳訂單細節中的資料
+	JSONArray getProductINFO(Integer productOrderID);
 
 }

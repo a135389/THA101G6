@@ -1,5 +1,7 @@
 package order.productOrder.dao;
 
+import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,6 +10,7 @@ import order.courseOrder.model.CourseOrder;
 import order.courseOrderDetail.model.CourseOrderDetail;
 import order.productOrder.model.ProductOrder;
 import order.productOrderDetail.model.ProductOrderDetail;
+import product.model.Product;
 
 
 
@@ -60,6 +63,48 @@ public class ProductOrderDaoImpl implements ProductOrderDao{
 	@Override
 	public List<ProductOrderDetail> selectDetailByOrderID(Integer productOrderID) {
 		return getSession().createQuery("FROM ProductOrderDetail WHERE productOrderID = "+productOrderID,ProductOrderDetail.class).list();
+	}
+
+	@Override
+	public Product getProductByID(Integer productID) {
+		return getSession().get(Product.class, productID);
+	}
+
+	@Override
+	public List<Integer> getAllOrderIdByUser(Integer userID) {
+		return getSession().createQuery("SELECT productOrderID FROM ProductOrder WHERE userID = "+userID,Integer.class).list();
+	}
+
+	@Override
+	public Timestamp getOrderBuyDate(Integer productOrderID) {
+		Date date=getSession().createQuery("SELECT buyDateTime FROM ProductOrder WHERE productOrderID = "+productOrderID,Date.class).list().get(0);
+		Timestamp ts=new Timestamp(date.getTime());
+		return ts;
+	}
+
+	@Override
+	public String getAddr(Integer productOrderID) {
+		return getSession().createQuery("SELECT deliveryAddr FROM ProductOrder WHERE productOrderID = "+productOrderID,String.class).list().get(0);
+	}
+
+	@Override
+	public Integer getTotalPrice(Integer productOrderID) {
+		return getSession().createQuery("SELECT totalPrice FROM ProductOrder WHERE productOrderID = "+productOrderID,Integer.class).list().get(0);
+	}
+
+	@Override
+	public String getOrderStatus(Integer productOrderID) {
+		return getSession().createQuery("SELECT productOrderStatus FROM ProductOrder WHERE productOrderID = "+productOrderID,String.class).list().get(0);
+	}
+
+	@Override
+	public byte[] getProductImage(Integer productID) {
+		return getSession().createQuery("SELECT productImage FROM Product WHERE productId = "+productID,byte[].class).list().get(0);
+	}
+
+	@Override
+	public String getProductName(Integer productID) {
+		return getSession().createQuery("SELECT productName FROM Product WHERE productId = "+productID,String.class).list().get(0);
 	}
 
 }
