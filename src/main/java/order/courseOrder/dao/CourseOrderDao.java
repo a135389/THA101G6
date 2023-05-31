@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import core.CoreDao;
+import mem.model.Member;
 import order.courseOrder.model.CourseOrder;
 import order.courseOrderDetail.model.CourseOrderDetail;
 
@@ -40,6 +41,8 @@ public interface CourseOrderDao extends CoreDao{
 	void updateOrderPrice(Integer courseOrderID,Integer price);
 	List<String> getOrderDetailStatus(Integer courseOrderID);
 	void updateDetailStatus(Integer courseOrderDetailID);
+	Member selectMember(Integer userID);
+	List<Member> selectMemberByName(String userName);
 
 	
 

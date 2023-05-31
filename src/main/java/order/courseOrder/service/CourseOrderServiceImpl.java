@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import core.util.HibernateUtil;
+import mem.model.Member;
 import order.courseOrder.dao.CourseOrderDao;
 import order.courseOrder.dao.CourseOrderDaoImpl;
 import order.courseOrder.model.CourseOrder;
@@ -124,9 +125,9 @@ public class CourseOrderServiceImpl implements CourseOrderService{
 	}
 
 	@Override
-	public Integer updateDetailStatus(Integer courseOrderDetailID) {
-		dao.updateDetailStatus(courseOrderDetailID);
-		return courseOrderDetailID;
+	public Integer updateDetailStatus(Integer courseOrderID) {
+		dao.updateDetailStatus(courseOrderID);
+		return courseOrderID;
 		
 	}
 
@@ -144,6 +145,53 @@ public class CourseOrderServiceImpl implements CourseOrderService{
 					statusChecked=3;//全部皆為已通過
 				}
 				return statusChecked;
+	}
+
+	@Override
+	public boolean checkIdExist(Integer userID) {
+		return (dao.selectMember(userID)!=null);
+	}
+
+	@Override
+	public JSONArray checkIdToOrder(Integer userID) {
+		boolean IdExist=checkIdExist(userID);
+		
+		if(IdExist) {
+			try {
+				List<CourseOrder>list=dao.selectAllByUserID(userID);
+				JSONArray jsonArray=new JSONArray(list);
+				return jsonArray;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+		}else {
+			return null;
+		}
+		
+	}
+
+	@Override
+	public JSONArray checkUserName(String userName) {
+		List<Member>list=dao.selectMemberByName(userName);
+		JSONArray jsonArray=new JSONArray();
+		if(list.size()!=0) {
+			for(Member member:list) {
+				JSONObject jsonObject=new JSONObject();
+				jsonObject.put("userID",member.getUserID());
+				jsonObject.put("userName",member.getUserName());
+				jsonObject.put("email",member.getEmail());
+				jsonObject.put("personID",member.getPersonID());
+				jsonObject.put("phone", member.getPhone());
+				jsonArray.put(jsonObject);
+				
+			}
+			return jsonArray;
+		}else {
+			return null;
+		}
+		
 	}
 
 

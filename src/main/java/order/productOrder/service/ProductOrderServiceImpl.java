@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import core.util.HibernateUtil;
+import mem.model.Member;
+import order.courseOrder.model.CourseOrder;
 import order.courseOrderDetail.model.CourseOrderDetail;
 import order.productOrder.dao.ProductOrderDao;
 import order.productOrder.dao.ProductOrderDaoImpl;
@@ -81,6 +83,53 @@ public class ProductOrderServiceImpl implements ProductOrderService{
 	}
 	return jsonArray;
 	}
+	@Override
+	public boolean checkIdExist(Integer userID) {
+		return (dao.selectMember(userID)!=null);
+	}
+
+	@Override
+	public JSONArray checkIdToOrder(Integer userID) {
+		boolean IdExist=checkIdExist(userID);
+		
+		if(IdExist) {
+			try {
+				List<ProductOrder>list=dao.selectAllByUserID(userID);
+				JSONArray jsonArray=new JSONArray(list);
+				return jsonArray;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+		}else {
+			return null;
+		}
+		
+	}
+
+	@Override
+	public JSONArray checkUserName(String userName) {
+		List<Member>list=dao.selectMemberByName(userName);
+		JSONArray jsonArray=new JSONArray();
+		if(list.size()!=0) {
+			for(Member member:list) {
+				JSONObject jsonObject=new JSONObject();
+				jsonObject.put("userID",member.getUserID());
+				jsonObject.put("userName",member.getUserName());
+				jsonObject.put("email",member.getEmail());
+				jsonObject.put("personID",member.getPersonID());
+				jsonObject.put("phone", member.getPhone());
+				jsonArray.put(jsonObject);
+				
+			}
+			return jsonArray;
+		}else {
+			return null;
+		}
+		
+	}
+	
 
 
 }

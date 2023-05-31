@@ -25,7 +25,7 @@ $(document).ready(function init(){
                 detail_html+=   '<td><img alt="" src="/THA101G6/courseImgServlet?courseID='+courseID+'" /></td>'
                 detail_html+=   "<td>"+courseName+"</td>"
                 detail_html+=   "<td>"+coursePrice+"</td>"
-                detail_html+=   "<td>"+courseOrderDetailStatus+"</td>"
+                detail_html+=   "<td class='status'>"+courseOrderDetailStatus+"</td>"
                 if(courseOrderDetailStatus=="已結帳"){
                 }
                 else{
@@ -34,9 +34,6 @@ $(document).ready(function init(){
                 detail_html+="</tr>"
 
                 $("#courseOrderDetailList>table>tbody").prepend(detail_html);
-
-
-
             }
         },
         error:function(){
@@ -105,6 +102,7 @@ $(".row").on("click","div[status='checkout']",function(){
                                 console.log("結帳成功")
                                 $("#inputDiv").remove();
                                 $(".delMark").remove();
+                                $(".status").text("已結帳");
                                 total(courseOrderID);
                                 check(courseOrderID);
                                 init();

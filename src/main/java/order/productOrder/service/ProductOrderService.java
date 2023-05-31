@@ -20,5 +20,11 @@ public interface ProductOrderService {
 	JSONArray getOrderListHeader(Integer userID);
 	//回傳訂單細節中的資料
 	JSONArray getProductINFO(Integer productOrderID);
+	//查詢是否有該使用者ID,並回傳布林值
+	boolean checkIdExist(Integer userID);
+	//查詢是否有此使用者ID並以此搜尋訂單資料回傳
+	JSONArray checkIdToOrder(Integer userID);
+	//查詢是否有相應的使用者名稱,並回傳符合的使用者資料
+	JSONArray checkUserName(String userName);
 
 }

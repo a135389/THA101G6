@@ -13,7 +13,7 @@ import org.json.JSONArray;
 
 import order.productOrder.service.ProductOrderService;
 import order.productOrder.service.ProductOrderServiceImpl;
-@WebServlet("/web/order/ProductOrderServlet")
+@WebServlet("/order/ProductOrderServlet")
 public class productOrderServlet extends HttpServlet{
 	private ProductOrderService productOrderService;
 	@Override
@@ -37,9 +37,46 @@ public class productOrderServlet extends HttpServlet{
 			case "listOrder":
 				fowardPath=listOrder(req,res);
 				break;
+			case "checkUserID":
+				fowardPath=checkUserID(req,res);
+				break;
+			case "checkUserName":
+				fowardPath=checkUserName(req,res);
+				break;
 		}
 	}
 
+	private String checkUserName(HttpServletRequest req, HttpServletResponse res) {
+		res.setContentType("text/html; charset=UTF-8");
+		String searchName=String.valueOf(req.getParameter("searchName"));
+		JSONArray jsonArray=productOrderService.checkUserName(searchName);
+		System.out.println(jsonArray);
+
+		PrintWriter writer;
+		try {
+			writer = res.getWriter();
+			writer.print(jsonArray);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	private String checkUserID(HttpServletRequest req, HttpServletResponse res) {
+		res.setContentType("text/html; charset=UTF-8");
+		Integer searchID=Integer.valueOf(req.getParameter("searchID"));
+		JSONArray jsonArray=productOrderService.checkIdToOrder(searchID);
+
+		PrintWriter writer;
+		try {
+			writer = res.getWriter();
+			writer.print(jsonArray);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	private String listOrder(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("text/html; charset=UTF-8");
 		Integer productOrderID=Integer.parseInt(req.getParameter("productOrderID"));

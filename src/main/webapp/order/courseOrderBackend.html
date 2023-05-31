@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- 引入bootstrap套件CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.css" />
-    <link rel="stylesheet" href="/css/root.css" />
-    <link rel="stylesheet" href="/css/backend_public.css" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/backend_public.css" />
+    <link rel="stylesheet" href="../css/order_backend.css" />
     <title>後臺公版</title>
   </head>
 
@@ -173,13 +174,37 @@
           </ol>
         </nav>
         <!-- 主內容欄 -->
-        <div class="content_section vh-100 mx-3 my-1">
+        <div
+          class="content_section vh-100 mx-3 my-1"
+          style="text-align: center"
+        >
           <hr />
-          頁面內容(功能展現)置於此
+          <div>
+            <p style="display: inline">輸入會員編號:</p>
+            <input type="number" id="searchByID" />
+            <button id="searchByIdBtn">查詢</button><br />
+            <p style="display: inline">輸入會員姓名:</p>
+            <input type="text" id="searchByName" />
+            <button id="searchByNameBtn">查詢</button>
+          </div>
+          <div id="displayOrder">
+            <table>
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="displayDetail">
+            <table>
+              <thead></thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
     <!-- 引入bootstrap套件JS -->
-    <script src="/js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/jQuery v3.7.0.js"></script>
+    <script src="../js/courseOrderBackend.js"></script>
   </body>
 </html>

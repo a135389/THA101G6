@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import mem.model.Member;
 import order.courseOrder.model.CourseOrder;
 import order.courseOrderDetail.model.CourseOrderDetail;
 import order.productOrder.model.ProductOrder;
@@ -105,6 +106,20 @@ public class ProductOrderDaoImpl implements ProductOrderDao{
 	@Override
 	public String getProductName(Integer productID) {
 		return getSession().createQuery("SELECT productName FROM Product WHERE productId = "+productID,String.class).list().get(0);
+	}
+
+	@Override
+	public Member selectMember(Integer userID) {
+		return getSession().get(Member.class, userID);
+	}
+	
+	@Override
+	public List<Member> selectMemberByName(String userName) {
+		return getSession().createQuery("FROM Member "
+										+"WHERE userName "
+										+"LIKE :searchName")
+										.setParameter("searchName","%"+userName+"%").list();
+				
 	}
 
 }

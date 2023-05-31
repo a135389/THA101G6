@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import mem.model.Member;
 import order.courseOrder.model.CourseOrder;
 import order.courseOrderDetail.model.CourseOrderDetail;
 
@@ -114,14 +115,26 @@ public class CourseOrderDaoImpl implements CourseOrderDao{
 		return list;
 	}
 	@Override
-	public void updateDetailStatus(Integer courseOrderDetailID) {
+	public void updateDetailStatus(Integer courseOrderID) {
 		getSession().createQuery("UPDATE CourseOrderDetail "
 									+"SET courseOrderDetailStatus = :courseOrderDetailStatus "
-									+"WHERE courseOrderDetailID = :courseOrderDetailID")
+									+"WHERE courseOrderID = :courseOrderID")
 									.setParameter("courseOrderDetailStatus","已結帳")
-									.setParameter("courseOrderDetailID", courseOrderDetailID).executeUpdate();
+									.setParameter("courseOrderID", courseOrderID).executeUpdate();
 				
 		
+	}
+	@Override
+	public Member selectMember(Integer userID) {
+		return getSession().get(Member.class, userID);
+	}
+	@Override
+	public List<Member> selectMemberByName(String userName) {
+		return getSession().createQuery("FROM Member "
+										+"WHERE userName "
+										+"LIKE :searchName")
+										.setParameter("searchName","%"+userName+"%").list();
+				
 	}
 
 	

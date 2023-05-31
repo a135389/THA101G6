@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import order.courseCar.service.CourseCarService;
 import order.courseCar.service.CourseCarServiceImpl;
 
-@WebServlet("/web/order/CourseCarServlet")
+@WebServlet("/order/CourseCarServlet")
 public class CourseCarServlet extends HttpServlet{
 	private CourseCarService courseCarService;
 	

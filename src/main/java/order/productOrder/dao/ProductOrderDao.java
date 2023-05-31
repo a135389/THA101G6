@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import core.CoreDao;
+import mem.model.Member;
 import order.productOrder.model.ProductOrder;
 import order.productOrderDetail.model.ProductOrderDetail;
 import product.model.Product;
@@ -43,6 +44,10 @@ public interface ProductOrderDao extends CoreDao{
 	byte[]getProductImage(Integer productID);
 	
 	String getProductName(Integer productID);
+	
+	Member selectMember(Integer userID);
+	
+	List<Member> selectMemberByName(String userName);
 	
 	
 }
